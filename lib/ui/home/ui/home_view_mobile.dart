@@ -35,15 +35,21 @@ class _HomeViewMobileState extends State<HomeViewMobile> {
           title: TextFormField(
             controller: _searchController,
             decoration: InputDecoration(
-              hintText: 'Search',
-              filled: true,
-              fillColor: Theme.of(context).cardColor,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide.none,
-              ),
-            ),
+                hintText: 'Search',
+                filled: true,
+                fillColor: Theme.of(context).cardColor,
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    _searchController.clear();
+                    context.read<HomeBloc>().add(SearchData(""));
+                  },
+                )),
             onChanged: (value) {
               context.read<HomeBloc>().add(SearchData(value));
             },
